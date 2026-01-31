@@ -1,0 +1,12 @@
+// Xcode Signing Configuration Template
+// Copy this file to Signing.xcconfig and fill in your values
+// Signing.xcconfig is git-ignored and won't be committed
+
+// Your Apple Developer Team ID (found in Apple Developer Portal)
+DEVELOPMENT_TEAM = YOUR_TEAM_ID_HERE
+
+// Code signing identity
+CODE_SIGN_IDENTITY = Apple Development
+
+// Code signing style
+CODE_SIGN_STYLE = Automatic

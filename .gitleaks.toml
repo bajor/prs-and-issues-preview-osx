@@ -1,0 +1,66 @@
+# Gitleaks configuration file
+# https://github.com/gitleaks/gitleaks
+
+title = "Gitleaks Custom Configuration"
+
+[extend]
+# Use the default gitleaks rules as a base
+useDefault = true
+
+# Custom rules for additional patterns
+[[rules]]
+id = "hardcoded-password"
+description = "Hardcoded password in code"
+regex = '''(?i)(password|passwd|pwd)\s*[:=]\s*["'][^"']{8,}["']'''
+keywords = ["password", "passwd", "pwd"]
+
+[[rules]]
+id = "hardcoded-api-key"
+description = "Hardcoded API key"
+regex = '''(?i)(api[_-]?key|apikey)\s*[:=]\s*["'][a-zA-Z0-9_\-]{20,}["']'''
+keywords = ["api_key", "apikey", "api-key"]
+
+[[rules]]
+id = "connection-string"
+description = "Database connection string with credentials"
+regex = '''(?i)(mongodb|mysql|postgres|redis|amqp):\/\/[^:]+:[^@]+@'''
+keywords = ["mongodb", "mysql", "postgres", "redis", "amqp"]
+
+[[rules]]
+id = "jwt-token"
+description = "JWT Token"
+regex = '''eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]*'''
+keywords = ["eyJ"]
+
+[[rules]]
+id = "basic-auth-header"
+description = "Basic Auth Header"
+regex = '''(?i)authorization:\s*basic\s+[a-zA-Z0-9+/=]{10,}'''
+keywords = ["authorization", "basic"]
+
+[[rules]]
+id = "bearer-token-header"
+description = "Bearer Token Header"
+regex = '''(?i)authorization:\s*bearer\s+[a-zA-Z0-9._\-]+'''
+keywords = ["authorization", "bearer"]
+
+# Allowlist - patterns to ignore
+[allowlist]
+description = "Global allowlist"
+paths = [
+    '''(?i).*test.*''',
+    '''(?i).*mock.*''',
+    '''(?i).*example.*''',
+    '''(?i).*\.md$''',
+    '''\.gitleaks\.toml$''',
+]
+regexes = [
+    '''example\.com''',
+    '''test\.test''',
+    '''YOUR_.*_HERE''',
+    '''<.*>''',
+    '''REPLACE_ME''',
+    '''CHANGEME''',
+    '''placeholder''',
+    '''xxxxxxxx''',
+]

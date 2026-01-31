@@ -1,0 +1,60 @@
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# Xcode (if opened)
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+
+# Neovim
+*.log
+.luarc.json
+.nvimlog
+
+# Project specific
+.env
+.env.*
+config.local.json
+Config/Signing.xcconfig
+
+# Test artifacts
+coverage/
+*.lcov
+
+# Build outputs
+dist/
+build/
+out/
+
+# Logs
+logs/
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+
+# Private keys (security)
+*.pem
+*.key
+*.p12

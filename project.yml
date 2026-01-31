@@ -1,0 +1,65 @@
+name: PRsAndIssuesPreview
+options:
+  bundleIdPrefix: com
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "26.2"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+
+targets:
+  PRsAndIssuesPreview:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/PRsAndIssuesPreview
+        type: group
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.prsandissuespreview
+        PRODUCT_NAME: PRsAndIssuesPreview
+        INFOPLIST_FILE: Resources/Info.plist
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_OBJC_BRIDGING_HEADER: ""
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
+        COMBINE_HIDPI_IMAGES: true
+    info:
+      path: Resources/Info.plist
+
+  PRsAndIssuesPreviewTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/PRsAndIssuesPreviewTests
+        type: group
+    dependencies:
+      - target: PRsAndIssuesPreview
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.prsandissuespreview.tests
+        PRODUCT_NAME: PRsAndIssuesPreviewTests
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/PRsAndIssuesPreview.app/Contents/MacOS/PRsAndIssuesPreview"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
+schemes:
+  PRsAndIssuesPreview:
+    build:
+      targets:
+        PRsAndIssuesPreview: all
+        PRsAndIssuesPreviewTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - PRsAndIssuesPreviewTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
