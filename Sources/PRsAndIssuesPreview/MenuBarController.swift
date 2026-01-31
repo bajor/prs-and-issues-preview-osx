@@ -124,7 +124,7 @@ public final class MenuBarController: NSObject {
         let newMenu = NSMenu()
 
         // Header
-        let headerItem = NSMenuItem(title: "PR Review System", action: nil, keyEquivalent: "")
+        let headerItem = NSMenuItem(title: "PRs & Issues Preview", action: nil, keyEquivalent: "")
         headerItem.isEnabled = false
         newMenu.addItem(headerItem)
 

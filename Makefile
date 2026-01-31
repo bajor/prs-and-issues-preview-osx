@@ -56,6 +56,8 @@ install-app: build-app
 	@echo "==> Installing to /Applications..."
 	@rm -rf "/Applications/PRs and Issues Preview.app"
 	@cp -r "$(APP_BUNDLE)" /Applications/
+	@echo "==> Signing app..."
+	@codesign --force --deep --sign - "/Applications/PRs and Issues Preview.app"
 	@echo "Installed! Run with: open '/Applications/PRs and Issues Preview.app'"
 
 uninstall-app:
