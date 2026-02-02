@@ -53,6 +53,7 @@ paths = [
     '''(?i).*example.*''',
     '''(?i).*\.md$''',
     '''\.gitleaks\.toml$''',
+    '''.*\.xcscheme$''',
 ]
 regexes = [
     '''example\.com''',
