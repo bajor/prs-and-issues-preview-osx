@@ -17,6 +17,7 @@ final class CleanupServiceTests: XCTestCase {
             githubToken: "test",
             githubUsername: "user",
             repos: ["owner/repo"],
+            excludedRepos: [],
             tokens: [:],
             cloneRoot: "/tmp/test",
             pollIntervalSeconds: 300,
