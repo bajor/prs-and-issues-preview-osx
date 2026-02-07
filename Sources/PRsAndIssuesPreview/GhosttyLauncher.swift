@@ -159,8 +159,10 @@ public final class GhosttyLauncher {
 
     /// Open a PR in a new Ghostty tab using AppleScript
     private func openInNewTab(prURL: String, workingDirectory: String) async throws {
-        // Write URL to temp file to avoid long command line issues with terminal wrapping
-        try prURL.write(toFile: "/tmp/pr-review-url.txt", atomically: true, encoding: .utf8)
+        // Write URL to file in nvim data dir (matches vim.fn.stdpath("data") .. "/raccoon-url.txt")
+        let urlFile = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent(".local/share/nvim/raccoon-url.txt").path
+        try prURL.write(toFile: urlFile, atomically: true, encoding: .utf8)
 
         let nvimPath = config.nvimPath
         let shellCommand = "cd '\(workingDirectory)' && \(nvimPath) -c 'Raccoon open'"
@@ -211,8 +213,10 @@ public final class GhosttyLauncher {
             throw GhosttyLauncherError.ghosttyNotFound(path: ghosttyBinary)
         }
 
-        // Write URL to temp file to avoid long command line issues with terminal wrapping
-        try prURL.write(toFile: "/tmp/pr-review-url.txt", atomically: true, encoding: .utf8)
+        // Write URL to file in nvim data dir (matches vim.fn.stdpath("data") .. "/raccoon-url.txt")
+        let urlFile = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent(".local/share/nvim/raccoon-url.txt").path
+        try prURL.write(toFile: urlFile, atomically: true, encoding: .utf8)
 
         // Build the shell command to execute inside Ghostty
         let nvimPath = config.nvimPath
