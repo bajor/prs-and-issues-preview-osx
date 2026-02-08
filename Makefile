@@ -48,14 +48,20 @@ build-app:
 	@mkdir -p "$(APP_BUNDLE)/Contents/MacOS"
 	@mkdir -p "$(APP_BUNDLE)/Contents/Resources"
 	@cp .build/release/PRsAndIssuesPreview "$(APP_BUNDLE)/Contents/MacOS/"
-	@cp Resources/Info.plist "$(APP_BUNDLE)/Contents/"
+	@sed -e 's/$$(EXECUTABLE_NAME)/PRsAndIssuesPreview/g' \
+		-e 's/$$(PRODUCT_BUNDLE_IDENTIFIER)/com.prsandissuespreview/g' \
+		-e 's/$$(PRODUCT_NAME)/PRs and Issues Preview/g' \
+		-e 's/$$(DEVELOPMENT_LANGUAGE)/en/g' \
+		Resources/Info.plist > "$(APP_BUNDLE)/Contents/Info.plist"
 	@echo -n "APPL????" > "$(APP_BUNDLE)/Contents/PkgInfo"
+	@codesign --force --deep --sign - "$(APP_BUNDLE)"
 	@echo "App bundle created at: $(APP_BUNDLE)"
 
 install-app: build-app
 	@echo "==> Installing to /Applications..."
 	@rm -rf "/Applications/PRs and Issues Preview.app"
 	@cp -r "$(APP_BUNDLE)" /Applications/
+	@xattr -cr "/Applications/PRs and Issues Preview.app"
 	@echo "Installed! Run with: open '/Applications/PRs and Issues Preview.app'"
 
 uninstall-app:
